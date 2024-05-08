@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Solver</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="Sudoku.js"></script>
+    <link rel="stylesheet" href="styles4.css">
+</head>
+<body>
+    <div class="bg">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-light card1">
+                <a class="navbar-brand" href="#"><img src="images/sudoku.jpg" class="img2"/></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse ml-auto" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ml-auto">
+                        <b>
+                            <div class="d-flex flex-row">
+                                <a class="nav-item nav-link active text1 text-bold" href="#ss">Sudoku Solver<span class="sr-only">(current)</span></a>
+                                <a class="nav-item nav-link text1" href="#sudo">Get a Sudoku Done</a>
+                                <a class="nav-item nav-link text1" href="#hdiw">How does it work</a>
+                            </div>
+                            
+                        </b>
+                        
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+        <div class="card1 container-fluid" id="ss">
+            <h1 class="heading1">Sudoku Solver</h1>
+            <p class="text1">
+                This page is designed with HTML, CSS, javascript to solve a sudoku puzzle with in 
+                seconds. But this is not the end. This application might be insignificant in real world.
+                But the data structure and the algorithms used in this application can be modified to 
+                assist us in tiring tasks like designing a time table for colleges where more number of 
+                batches are to be handled by few teachers.
+            </p>
+        </div>
+            <div class="container-fluid card1">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <form id="sudokuForm">
+                            <div id="tableContainer"></div>
+                            <button type="button" class="btn mb-1 w-100 light" onclick="takeInput()">Submit</button>
+                            <div>
+                                <input type="reset" class="w-100 btn mb-1 light">
+                            </div>
+                            <input class="w-100 btn light" type="button" 
+                                onclick="printArea('printThis');" 
+                                Value="Print">
+                        
+                            <script type="text/javascript">
+                                function printArea(areaName) {
+                                    var actContents = document.body.innerHTML;
+                                    document.body.innerHTML = actContents;
+                                    window.print();
+                                }
+                            </script>
+                            
+                        </form>
+                    </div>
+                    
+                    <div id="solution" class="col-12 col-md-6"></div>
+                    <p class="text1 col-12" id="end"></p>
+                    
+                </div>
+            </div>
+            
+
+        <div class="card1 container-fluid" id="hdiw">
+            <h2 class="heading1">Data structure and Algorithms used:</h2>
+            <p class="text1">
+                The data structure used in this application is a combination of 
+                matrix and linked list. Each element of the matrix acts as a pointer to the start of a
+                linked list. This linked list stores all the possible values that can be enter in the 
+                particular cell according to the current state of the sudoku. It can be visualised as shown
+                in the below figure.
+            </p>
+            <img src="images/sudoku.jpg" class="img1"/>
+            <h2 class="heading1">Components of the used data structure are as follows:</h2>
+            
+                <ol class="text1">
+                    <li>
+                        Structure that holds a number , Boolean value to show if the number is fixed
+                        for that particular position and a self-referencing pointer. This structure is named as node.
+                    </li>
+                    <li>
+                        9x9 2-D array of pointers to the structures defined above .
+                    </li>
+                    <li>
+                        Linked list that holds the value of all the possible numbers that can be
+                        entered in the particular position.
+                    </li>
+                </ol>
+            
+            <h2 class="heading1">Working:</h2>
+            <p class="text1">
+                A function is designed to immitate a human solving a sudoku in a step by step 
+                manner. Steps involved are as below. 
+            </p>
+            <ol class="text1">
+                <li>First, All the possible numbers that can be entered in each cell is pushed into a linked
+                    list.
+                </li>
+                <li>
+                    Then, it checks if any of the linked list has only one element.
+                </li>
+                <li>
+                    If it is found, a function is called that deletes all the nodes with that number if present in the row,
+                    column or its 3X3 region containing the element found in the previous step, if any exists.
+                </li>
+                <li>
+                    Then, it checks if an element in the linked list of a particular cell is unique in it 3x3 region
+                    differentiated with different colors in the image above.
+                </li>
+                <li>
+                    If it finds such an element,it deletes all the elements in the linked list except the element that 
+                    is unique in the previous step.Then the function called it step 3 is called again.
+                </li>
+                <li>
+                    Then, it checks if an element in the linked list of a particular cell is unique in the row or
+                    column containing a particular cell. If found , step 5 is repeated.
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="footer m-0 p-0 mt-0">
+        <div class="container-fluid bg-light">
+            <div class="row">
+                <div class="col-12 col-md-6 card1 m-0">
+                    <h4 class="heading1">
+                        Team members:
+                    </h4>
+                    <div class="w-50">
+                        <ol class="text1">
+                            <li>Pradyumna Ragothaman</li>
+                            <li>Rakshith H Gowda</li>
+                            <li>Pratheek Patel B M</li>
+                            <li>Rishikesh</li>
+                            <li>Sankeeth</li>
+                        </ol>
+                    </div>
+                    
+                    <p class="text1">CSE-C</p>
+                </div>
+
+                <div class="col-12 col-md-6 card1 m-0">
+                    <h4 class="heading1">THE NATIONAL INSTITUTE OF ENGINEERING</h4>
+
+                    <p class="text1"><b>North Campus</b> No.50 (Part), Koorgalli village, 
+                    Hootagalli Industrial Area, 
+                    Mysuru-570018 Karnataka<br>
+                    TEL: (+91) 821 2480475,(+91) 821 4004900<br>
+                    northcampus@nie.ac.in<br>
+                    Location:<a href="https://www.google.co.in/maps/@12.3713438,76.5831078,16z"> Google Map Link</a></p>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
