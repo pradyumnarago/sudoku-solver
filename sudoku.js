@@ -397,8 +397,8 @@ function backtracking(row,col){
             console.log('backtraking at '+row+' '+col);
             //alert('Fixing '+board[row][col].data+' at '+row+' '+col);
             if(backtracking(rown,coln)){
-                if(row==0 && col==0)
-                    alert('done');
+                //if(row==0 && col==0)
+                    //alert('done');
                 return true;
             }
         }
@@ -407,8 +407,8 @@ function backtracking(row,col){
         ptr=ptr.next;
     }
     board[row][col]=ptr2;
-    if(row==0 && col==0)
-        alert('backtracking unsuccessful.');
+    //if(row==0 && col==0)
+        //alert('backtracking unsuccessful.');
     return false;
 }
 
@@ -808,7 +808,7 @@ function solveSudoku() {
                     alert('Found a null at '+a+' '+b);
             }
         }
-        alert('backtracking');
+        //alert('backtracking');
         if(!backtracking(0,0)){
             const list = document.getElementById("end");
 
