@@ -1,6 +1,8 @@
 # sudoku-solver
 A website that can solve sudoku using heuristic and also backtracking if needed using matrix and linked list.
 <br><br>
+You can try using this website here :- https://pradyumnarago.github.io/sudoku-solver/
+<br><br>
 This page is designed with HTML, CSS, javascript to solve a sudoku puzzle with in 
 seconds. But this is not the end. This application might be insignificant in real world.
 But the data structure and the algorithms used in this application can be modified to 
