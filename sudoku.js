@@ -439,7 +439,7 @@ function solveSudoku() {
         }
     }
     printB();
-    const list = document.getElementById("end");
+    const list = document.getElementById("max");
 
     list.innerHTML = "Maximum number of locations required to solve this sudoku with " +  `${inputs}` + " is " + `${maxspace}`;
     
