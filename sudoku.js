@@ -2,6 +2,7 @@ const N = 9;
 const d= new Date();
 let starttime;
 let endtime;
+let maxspace = 0;
 
 function createTable() {
     const tableContainer = document.getElementById('tableContainer');
@@ -264,6 +265,7 @@ function takeInput() {
             }else{
                 console.log('row:'+(i+1)+' col: '+(j+1)+' num: '+cellValue);
                 board[i][j] = { data: cellValue, done: true, next: null };
+                maxspace = maxspace + 1;
             }
             
         }
@@ -417,11 +419,13 @@ function solveSudoku() {
     //alert(startTime);
     //starttime=(d.getHours())*3600+(d.getMinutes())*60+(d.getSeconds());
     printB();
+    const inputs = maxspace;
     for (let row = 0; row < N; row++) {
         for (let col = 0; col < N; col++) {
             if (board[row][col] === null) {
                 for (let num = 1; num <= N; num++) {
                     if (isValid(row, col, num)) {
+                        maxspace = maxspace + 1;
                         if(board[row][col]==null){
                             board[row][col] = { data: num, done: false, next: null };
                         }else{
@@ -435,6 +439,9 @@ function solveSudoku() {
         }
     }
     printB();
+    const list = document.getElementById("end");
+
+    list.innerHTML = "Maximum number of locations required to solve this sudoku with " +  `${inputs}` + " is " + `${maxspace}`;
     
     while (done()) {
         
